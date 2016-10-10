@@ -6,6 +6,7 @@ Have you ever been annoyed by the amount of time you spend manually changing the
 with Staticfy you can save that time (and some of your hair) by automatically converting the static urls in your template to dynamic url's that wouldn't break if you decide to move your file to another location.
 
 It transforms Links (Flask) from this:
+
 `<img src="img/staticfy.jpg" />`
 
 To this:
