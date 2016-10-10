@@ -10,6 +10,7 @@ It transforms Links (Flask) from this:
 `<img src="img/staticfy.jpg" />`
 
 To this:
+
 `<img src="{{ url_for('static', filename='img/staticfy.jpg') }}" />`
 
 # Get it in 10 seconds!
