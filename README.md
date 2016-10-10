@@ -5,29 +5,23 @@
 Have you ever been annoyed by the amount of time you spend manually changing the links in a html template you bought or downloaded until all the static files and assets are properly linked and the file looks exactly like the demo you saw online?
 with Staticfy you can save that time (and some of your hair) by automatically converting the static urls in your template to dynamic url's that wouldn't break if you decide to move your file to another location.
 
-`<img src="img/staticfy.jpg" />` ===> `<img src="{{ url_for('static', filename='img/staticfy.jpg') }}" />`
+It transforms Links (Flask) from this:
+`<img src="img/staticfy.jpg" />`
 
-# Installation and Usage
-Clone the repo from github
+To this:
+`<img src="{{ url_for('static', filename='img/staticfy.jpg') }}" />`
+
+# Get it in 10 seconds!
+It's available as a package on PyPi so you can install it with
 
 ```bash
-git clone https://github.com/danidee10/Staticfy.git
+pip install staticfy
 ```
+That's all!
 
-Make the script executable with
+Run it straight from the command line with:
 ```bash
-sudo chmod +x staticfy.py`
-```
-
-and run it
-```bash
-./staticfy.py staticfy.html --static-endpoint=static --add-tags='{"img": "data-url"}'`
-```
-
-Using `./` runs Staticfy with python3, if you're running windows or you want to use another version of python e.g python2, you can just run
-
-```bash
-python2 staticfy.py staticfy.html --static-endpoint=static --add-tags='{"img": "data-url"}'`
+staticfy staticfy.html --static-endpoint=static --add-tags='{"img": "data-url"}'`
 ```
 
  `--static-endpoint` and `--add-tags` are optional
@@ -47,7 +41,7 @@ Staticfy is also smart enough to know if it was given a single file or a directo
 staticfy will search through the specified folder and staticfy all the (html | htm) files it finds, this saves you more time if you want to staticfy a bunch of files at once.
 
 ```bash
-./staticfy.py html_files'
+staticfy html_files'
 ```
 
 # Additional tags and attributes
@@ -59,7 +53,7 @@ By default staticfy identifies and staticfies the following tags:
 But it's common these days for javascript libraries (for a slider or animation) that have link to images (mostly) or other static resources. you can easily staticfy those tags by specifying the `--add-tags` argument and passing in a valid JSON string, an example is this slider from http://www.pixedelic.com/plugins/camera/, you can staticfy the div tags like this
 
 ```bash
-./staticfy.py staticfy.html --add-tags='{"div": "data-src"}'`
+staticfy staticfy.html --add-tags='{"div": "data-src"}'`
 ```
 
 and sure enough it gets staticfied
@@ -73,7 +67,7 @@ and sure enough it gets staticfied
 You can exclude certain tags you don't want to be staticfied by specifying the `--exc-tags` parameter, like `--add-tags` it expects a valid JSON string.
 
 ```bash
-./staticfy.py staticfy.html --exc-tags='{"img": "src"}'`
+staticfy staticfy.html --exc-tags='{"img": "src"}'`
 ```
 running that on a template should leave the img tags with the src attribute as they were in the original file.
 
@@ -125,7 +119,7 @@ To add support for other frameworks, simply edit the __config__.py file and add 
 
 # Tests
 The tests are located in the `test.py` file and can be run with
-`./test.py`
+`python3 test.py`
 
 # Python support
 Staticfy supports both python2 and python3
@@ -136,14 +130,16 @@ Beautiful soup 4
 `pip3 install bs4`
 or you can use the requirements file `pip3 install -r requirements.txt`
 
-if you have issues with importing HTML.parser on python 3.5, run this
+if you have issues with importing HTML.parser on python 3.5, upgrade beautifulSoup:
+
 `pip install --upgrade beautifulsoup4`
 
 # Contribution
-Pull requests and issues are welcome, if you're making a pull request, make sure
-you respect the surrounding code style and write tests to show that your code
-works, in your PR and commit also describe clearly what your PR attempts to
-fix / improve / add
+Pull requests and issues are highly welcome. I'm still looking to support as many web frameworks as possible.
+
+Describe clearly what your PR attempts to fix (if it's a bug) or improve (If it's an existing feature).
+
+If you want to add support for a new web framework, add the required pattern for the framework to the `frameworks` dictionary in `__config__.py`, make your tests pass and submit your Pull request.
 
 You should also write your code from python3's perspective, try to avoid python2 style and idioms
 as much as possible.
