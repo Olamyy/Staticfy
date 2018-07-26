@@ -76,7 +76,7 @@ def staticfy(file_, static_endpoint='static', project_type='flask', **kwargs):
     makedir(os.path.dirname(out_file))
 
     # open files and start replacing matching lines
-    with open(file_, 'r') as input_file, open(out_file, 'w+') as output_file:
+    with open(file_, 'r') as input_file, open(out_file, 'wb') as output_file:
         for file_line in input_file:
             # replace all single quotes with double quotes
             file_line = re.sub(r'\'', '"', file_line)
